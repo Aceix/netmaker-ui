@@ -11,8 +11,6 @@ jobs:
     steps:
       - name: "Checkout to staging"
         uses: actions/checkout@v3
-        with:
-          ref: staging
 
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v2
