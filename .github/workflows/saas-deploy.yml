@@ -23,7 +23,7 @@ jobs:
 
       - name: Set release tag
         run: |
-            TAG="$GITHUUB_SHA | head -c7"
+            TAG="$($GITHUB_SHA | head -c7)"
             echo "TAG=${TAG}" >> $GITHUB_ENV
 
       - name: Build and push
