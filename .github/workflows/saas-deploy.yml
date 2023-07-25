@@ -28,7 +28,7 @@ jobs:
           file: ./Dockerfile.saas
           platforms: linux/amd64
           push: true
-          tags: aceix/netmaker-ui-saas:$(echo $GITHUB_SHA | head -c7)
+          tags: aceix/netmaker-ui-saas:test
 
       - name: Set up kubectl
         uses: matootie/dokube@v1.4.0
@@ -45,7 +45,7 @@ jobs:
       #   run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 main-cluster
 
       - name: Set k8s deployment image
-        run: kubectl set image deployment netmaker-ui netmaker-ui=aceix/netmaker-ui-saas:$(echo $GITHUB_SHA | head -c7)
+        run: kubectl set image deployment netmaker-ui netmaker-ui=aceix/netmaker-ui-saas:test
 
       - name: Deploy to k8s cluster
         run: kubectl rollout restart deploy netmaker-ui
