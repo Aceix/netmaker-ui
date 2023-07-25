@@ -41,31 +41,11 @@ jobs:
           personalAccessToken: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           clusterName: main-cluster
 
-      # - name: Install doctl
-      #   uses: digitalocean/action-doctl@v2
-      #   with:
-      #     token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-      # - name: Prepare DO KUBECONFIG for staging
-      #   run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 main-cluster
-
       - name: Set k8s deployment image
         run: kubectl set image deployment netmaker-ui netmaker-ui=aceix/netmaker-ui-saas:${{ env.TAG }}
 
       - name: Deploy to k8s cluster
         run: kubectl rollout restart deploy netmaker-ui
-
-      # - name: Deploy to DigitalOcean Kubernetes
-      #   uses: WyriHaximus/github-action-helm3@v3
-      #   with:
-      #     kubeconfig: $(cat ~/.kube/config)
-      #     exec: |
-      #       helm upgrade -i netmaker-ui deploy/helm/netmaker-ui/ \
-      #       --namespace accounts \
-      #       --create-namespace \
-      #       --set env=staging \
-      #       --set image.pullPolicy=Always \
-      #       --set image.tag=$(echo $GITHUB_SHA | head -c7)
 
       - name: Verify deployment
         run: kubectl rollout status deployment/netmaker-ui
