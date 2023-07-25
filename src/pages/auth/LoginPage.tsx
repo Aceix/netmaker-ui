@@ -114,7 +114,7 @@ export default function LoginPage(props: LoginPageProps) {
       >
         <Row>
           <Col xs={24}>
-            <Typography.Title level={2}>{t('signin.signin')}</Typography.Title>
+            <Typography.Title level={2}>{t('signin.signin')} Hello Test</Typography.Title>
           </Col>
         </Row>
 
